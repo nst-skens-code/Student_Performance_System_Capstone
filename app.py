@@ -60,44 +60,47 @@ with tab1:
     
     # run prediction when button is clicked
     if st.button("Predict Performance", type="primary", use_container_width=True):
-        # put the inputs into a dataframe that matches the training data
-        input_data = pd.DataFrame({
-            'Math Score': [math_score],
-            'English Score': [english_score],
-            'Science Score': [science_score],
-            'Internal Assessment': [internal_marks],
-            'Attendance Percentage': [attendance],
-            'Late Submission Count': [late_submissions],
-            'Participation': [activities],
-            'Assignment Completion Rate': [assignment_completion],
-            'Study Hours per Week': [study_hours]
-        })
-        
-        # predict using the loaded pipeline
-        prediction = model.predict(input_data)[0]
-        category, description, color = class_mapping[prediction]
-        
-        st.subheader("Prediction Result")
-        
-        # Render custom styled alert based on prediction
-        if category == "At Risk":
-            st.error(f"### 🛑 {category}\n**{description}**\n\n*Immediate intervention recommended.*")
-        elif category == "Excellent":
-            st.success(f"### 🌟 {category}\n**{description}**")
-        elif category == "Good":
-            st.info(f"### 👍 {category}\n**{description}**")
+        if model is None:
+            st.error("Model is not loaded. Please train the model first.")
         else:
-            st.warning(f"### ⚠️ {category}\n**{description}**")
-        
-        # Simple feature overview plot
-        st.markdown("#### Input Metrics Overview")
-        metrics_df = pd.DataFrame(
-            {
-                "Metric": ["Math", "English", "Science", "Attendance", "Assignments"],
-                "Score": [math_score, english_score, science_score, attendance, assignment_completion]
-            }
-        )
-        st.bar_chart(metrics_df.set_index("Metric"), height=250, color=color)
+            # put the inputs into a dataframe that matches the training data
+            input_data = pd.DataFrame({
+                'Math Score': [math_score],
+                'English Score': [english_score],
+                'Science Score': [science_score],
+                'Internal Assessment': [internal_marks],
+                'Attendance Percentage': [attendance],
+                'Late Submission Count': [late_submissions],
+                'Participation': [activities],
+                'Assignment Completion Rate': [assignment_completion],
+                'Study Hours per Week': [study_hours]
+            })
+            
+            # predict using the loaded pipeline
+            prediction = model.predict(input_data)[0]
+            category, description, color = class_mapping[prediction]
+            
+            st.subheader("Prediction Result")
+            
+            # Render custom styled alert based on prediction
+            if category == "At Risk":
+                st.error(f"### 🛑 {category}\n**{description}**\n\n*Immediate intervention recommended.*")
+            elif category == "Excellent":
+                st.success(f"### 🌟 {category}\n**{description}**")
+            elif category == "Good":
+                st.info(f"### 👍 {category}\n**{description}**")
+            else:
+                st.warning(f"### ⚠️ {category}\n**{description}**")
+            
+            # Simple feature overview plot
+            st.markdown("#### Input Metrics Overview")
+            metrics_df = pd.DataFrame(
+                {
+                    "Metric": ["Math", "English", "Science", "Attendance", "Assignments"],
+                    "Score": [math_score, english_score, science_score, attendance, assignment_completion]
+                }
+            )
+            st.bar_chart(metrics_df.set_index("Metric"), height=250, color=color)
 
 # --- Sub-Feature 3: EDA Dashboard ---
 with tab2:
