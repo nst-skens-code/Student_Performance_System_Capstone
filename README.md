@@ -76,8 +76,4 @@ streamlit run app.py
 
 Navigate to `http://localhost:8501` to view the application.
 
-## 👥 Team Contribution
-*(To be filled during Viva Voce based on individual member tasks)*
-* **Member 1 Name**: Data Engineering, EDA, and Pipeline generation
-* **Member 2 Name**: Model Training, Hyperparameter tuning, optimization
-* **Member 3 Name**: Streamlit Application Development and deployment
+
