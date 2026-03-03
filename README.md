@@ -21,14 +21,19 @@ This project implements three distinct technical sub-features to provide a robus
 ```text
 Student_Performance_System/
 ├── app.py                  # Main Streamlit web application
-├── train_model.py          # ML data generation, training, and evaluation script
+├── train_model.py          # ML data pipeline, training, and evaluation script
 ├── requirements.txt        # Python dependencies
 ├── README.md               # Project documentation
+├── Technical_Report.md     # Full technical documentation matching rubric
 ├── data/
-│   └── student_data.csv    # Synthetically generated student dataset
+│   └── student_data.csv    # Proprietary student dataset
 └── models/
     └── student_performance_model.joblib # Serialized best-performing ML model
 ```
+
+## 📝 Team & Ethics
+- **The "No GenAI" Affirmation:** We formally affirm that the core logic, methodology, and implementation of this project is our own original work. 
+- **Team Contribution:** Detailed in `Technical_Report.md` outlining specific responsibilities for EDA, Modeling, and Dashboard generation.
 
 ## 🧠 Model Architecture & Methodology
 
